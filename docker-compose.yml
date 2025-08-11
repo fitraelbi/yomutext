@@ -1,11 +1,15 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  web:
-    image: fitrakz/yomutext
+  app:
+    image: fitrakz/yomutext:latest
     ports:
-      - "8000:8000"
-    volumes:
-      - ./core.db:/app/core.db
-    environment:
-      - DATABASE_URL=sqlite:////app/core.db
+      - "8005:8000"
+    deploy:
+      replicas: 1
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: overlay
