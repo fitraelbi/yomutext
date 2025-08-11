@@ -6,7 +6,7 @@ on:
       - devscale/assignment
 
 jobs:
-  build_and_push:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,6 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
 
     - name: Deploy to Swarm
@@ -35,4 +34,4 @@ jobs:
         username: ${{ secrets.SWARM_USERNAME }}
         key: ${{ secrets.SWARM_SSH_PRIVATE_KEY }}
         script: |
-          docker service update --image ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest assignment-devscale_app
+          docker service update --image ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }} assignment-devscale_app
