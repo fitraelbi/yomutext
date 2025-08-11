@@ -1,4 +1,3 @@
-from pydantic import VERSION
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
