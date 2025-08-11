@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 8000
 
+RUN chmod 777 ./bin/start.sh
+
 CMD ["./bin/start.sh"]
