@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - assignment-devscale
+      - devscale/assignment
 
 jobs:
   build_and_push:
