@@ -1,3 +1,5 @@
+name: Devscale Assignment
+
 on:
   push:
     branches:
@@ -24,7 +26,7 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }
+          ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
 
     - name: Deploy to Swarm
       uses: appleboy/ssh-action@master
@@ -34,5 +36,3 @@ jobs:
         key: ${{ secrets.SWARM_SSH_PRIVATE_KEY }}
         script: |
           docker service update --image ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest assignment-devscale_app
-
-
