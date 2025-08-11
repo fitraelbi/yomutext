@@ -1,4 +1,7 @@
-
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build_and_push:
@@ -22,4 +25,3 @@ jobs:
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
-
