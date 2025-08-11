@@ -1,14 +1,16 @@
-FROM python:3.12-alpine
+FROM python:3.12-slim AS builder
 
-WORKDIR /app
-
-COPY requirements.txt .
+RUN pip install --upgrade pip
 
 RUN pip install uv
 
-RUN uv install
+WORKDIR /app
 
-COPY ./app /app/app
+COPY pyproject.toml uv.lock* ./
+
+RUN uv pip install --system --no-cache .
+
+COPY . .
 
 EXPOSE 8000
 
